@@ -3,25 +3,18 @@ using System.Linq;
 using FuneralHome.Data.Entities;
 using FuneralHome.Data.Interfaces;
 using System.Data.Entity;
+using System.Security.Cryptography;
+using System.Runtime.Remoting.Contexts;
 
 namespace FuneralHome.Data.Repositories
 {
-    public class FuneralRepository
-    {
+    public class FuneralRepository : FuneralReposytoryBase<Funeral>
+    { 
         private readonly FuneralHomeContext _ctx;
 
-        public FuneralRepository()
+        public FuneralRepository(FuneralHomeContext context) : base(context)
         {
-            _ctx = new FuneralHomeContext();
+            _ctx = context;
         }
-        public ICollection<Funeral> GetAll()
-        {
-            return _ctx.Funerals
-                .Include(x => x.Client)
-                .Include(x => x.Employees)
-                .AsNoTracking()
-                .ToList();
-        }
-
     }
 }

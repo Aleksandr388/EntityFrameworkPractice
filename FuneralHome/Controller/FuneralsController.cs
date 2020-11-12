@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -28,6 +29,7 @@ namespace FuneralHome.Controller
             _mapper = new Mapper(mapperConfig);
             _funeralService = new FuneralService();
         }
+
         public IEnumerable<FuneralViewModel> GetAll()
         {
             var funerals = _funeralService.GetAll();
@@ -35,6 +37,33 @@ namespace FuneralHome.Controller
             return _mapper.Map<IEnumerable<FuneralViewModel>>(funerals);
         }
 
-        
+        public void Create(FuneralViewModel model)
+        {
+            var funeral = _mapper.Map<FuneralModel>(model);
+
+            _funeralService.Create(funeral);
+        }
+
+        public FuneralViewModel GetById(int id)
+        {
+            var funeral = _funeralService.GetById(id);
+
+            return _mapper.Map<FuneralViewModel>(funeral);
+        }
+
+        public void Remove(FuneralViewModel item)
+        {
+            var funeral = _mapper.Map<FuneralModel>(item);
+
+            _funeralService.Remove(funeral);
+
+        }
+
+        public void Update(FuneralViewModel entity, params Expression<Func<FuneralModel, object>>[] updatedProperties)
+        {
+            var funeral = _mapper.Map<FuneralModel>(updatedProperties);
+
+            _funeralService.Update(funeral);
+        }
     }
 }

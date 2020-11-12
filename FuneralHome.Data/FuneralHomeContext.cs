@@ -26,6 +26,7 @@ namespace FuneralHome.Data
             modelBuilder.Entity<Funeral>()
                 .HasMany(x => x.Employees)
                 .WithMany(x => x.Funerals);
+                
         }
     }
 }

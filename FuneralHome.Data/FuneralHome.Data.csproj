@@ -58,21 +58,26 @@
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Funeral.cs" />
     <Compile Include="FuneralHomeContext.cs" />
-    <Compile Include="Interfaces\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\IFuneralRepository.cs" />
     <Compile Include="Migrations\202011051759265_Initial_Create.cs" />
     <Compile Include="Migrations\202011051759265_Initial_Create.designer.cs">
       <DependentUpon>202011051759265_Initial_Create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011121430257_Add_Generic_repsitory.cs" />
+    <Compile Include="Migrations\202011121430257_Add_Generic_repsitory.designer.cs">
+      <DependentUpon>202011121430257_Add_Generic_repsitory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\FuneralRepository.cs" />
     <Compile Include="Repositories\FuneralReposytoryBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011051759265_Initial_Create.resx">
       <DependentUpon>202011051759265_Initial_Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011121430257_Add_Generic_repsitory.resx">
+      <DependentUpon>202011121430257_Add_Generic_repsitory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

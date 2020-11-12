@@ -4,8 +4,10 @@ using FuneralHome.Data.Interfaces;
 using FuneralHome.Data.Repositories;
 using FuneralHome.Domain.Interfaces;
 using FuneralHome.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 
 namespace FuneralHome.Domain.Services
@@ -13,8 +15,7 @@ namespace FuneralHome.Domain.Services
     public class FuneralService : IFuneralService
     {
         private readonly IMapper _mapper;
-        private readonly IFuneralRepository _funeralRepository;
-        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IFuneralRepository<Funeral> _funeralRepository;
         public FuneralService()
         {
             var mapperConfig = new MapperConfiguration(cfg =>
@@ -27,20 +28,43 @@ namespace FuneralHome.Domain.Services
             });
 
             _mapper = new Mapper(mapperConfig);
-            _funeralRepository = new FuneralRepository();
-            _employeeRepository = new EmployeeRepository();
+            _funeralRepository = new FuneralRepository(new Data.FuneralHomeContext());
         }
 
-        public IEnumerable<FuneralModel> GetAll()
+        public void Create(FuneralModel model)
+        {
+            var funeral = _mapper.Map<Funeral>(model);
+
+            _funeralRepository.Create(funeral);
+        }
+
+        ICollection<FuneralModel> IFuneralService.GetAll()
         {
             var funerals = _funeralRepository.GetAll();
 
-            return _mapper.Map<IEnumerable<FuneralModel>>(funerals);
+            return _mapper.Map<ICollection<FuneralModel>>(funerals);
         }
 
-        public FuneralModel Create(FuneralModel model)
+        public FuneralModel GetById(int id)
         {
-            return null;
+            var funeral = _funeralRepository.GetById(id);
+
+            return _mapper.Map<FuneralModel>(funeral);
+        }
+
+        public void Remove(FuneralModel item)
+        {
+            var funeral = _mapper.Map<Funeral>(item);
+
+            _funeralRepository.Remove(funeral);
+
+        }
+
+        public void Update(FuneralModel entity, params Expression<Func<FuneralModel, object>>[] updatedProperties)
+        {
+            var funeral = _mapper.Map<Funeral>(updatedProperties);
+
+            _funeralRepository.Update(funeral);
         }
     }
 }

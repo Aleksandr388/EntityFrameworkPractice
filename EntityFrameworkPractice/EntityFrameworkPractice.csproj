@@ -67,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FuneralHome.Common\FuneralHome.Common.csproj">
+      <Project>{E7C2F94E-3D6B-4BE3-879C-EF8953ED5127}</Project>
+      <Name>FuneralHome.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FuneralHome.Domain\FuneralHome.Domain.csproj">
       <Project>{b517c7a4-055d-419c-bbb5-cb96678fe745}</Project>
       <Name>FuneralHome.Domain</Name>
